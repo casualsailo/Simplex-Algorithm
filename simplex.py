@@ -45,7 +45,7 @@ def main():
         #adds the row of list into matrix
         matrix.append(matrixtemp)
 
-    simplex_algorithm(matrix)
+    simplex_algorithm(matrix, variables, rows+1)
     '''matrix = [[1,2,1,0,40], [4,3,0,1,120], [-40,-50,0,0,0]]
     simplex_algorithm(matrix)
 
@@ -58,9 +58,8 @@ def main():
     matrix = [[1,2,5,10,1,0,0,0,40],[4,3,7,1,0,1,0,0,120],[5,7,6,2,0,0,1,0,150],[6,1,8,7,0,0,0,1,130],[-40,-50,-80,-200,0,0,0,0,0]]
     simplex_algorithm(matrix)'''
 
-def simplex_algorithm(matrix):
-    #obtain the amount of rows & columns
-    rows = len(matrix)
+def simplex_algorithm(matrix, variables, rows):
+    #obtain the amount of columns
     columns = len(matrix[0])
 
     #print matrix
@@ -69,9 +68,6 @@ def simplex_algorithm(matrix):
             print(matrix[i][j], end="\t")
         print()
     print()
-    
-    #obtain number of variables
-    num = int((columns - 1) - (columns - 1)/2)
 
     x = []          #this list contains solution vector
     negative = 1
@@ -123,10 +119,10 @@ def simplex_algorithm(matrix):
                 print()
             print()
 
-    for i in range (0, num):
+    for i in range (0, variables):
         zero = 0
         one = 0
-        for j in range (0, num):
+        for j in range (0, rows):
             if (matrix[j][i] == 1):
                 if (one == 1):
                     zero = 1
