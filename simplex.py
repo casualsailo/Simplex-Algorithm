@@ -1,5 +1,52 @@
 def main():
-    matrix = [[1,2,1,0,40], [4,3,0,1,120], [-40,-50,0,0,0]]
+    matrix = []
+    
+    variables = int(input("How many variables: "))
+    rows = int(input("How many constraints: "))
+
+    #take in matrix as a string one row at a time
+    for i in range (0, rows+1):
+        matrixtemp = []
+        if (i == rows):
+            print("Enter objective function row:", end=" ")
+            text = input()
+        else:
+            print("Enter row {0}:".format(i+1), end=" ")
+            text = input()
+
+        #convert string into string array
+        #convert string array into int array
+        #add int values into matrix
+        #add slack variables into matrix as well
+        splitted = text.split(" ")
+
+        #for objective function row
+        if (i == rows):
+            for j in range(len(splitted)):
+                if (j == len(splitted)-1):
+                    for k in range (0, rows):
+                        matrixtemp.append(0)
+                    matrixtemp.append(-1*int(splitted[j]))                
+                else:                    
+                    matrixtemp.append(-1*int(splitted[j]))
+        #for all other rows
+        else:
+            for j in range(len(splitted)):
+                if (j == len(splitted)-1):
+                    for k in range (0, rows):
+                        if (i == k):
+                            matrixtemp.append(1)
+                        else:
+                            matrixtemp.append(0)
+                    matrixtemp.append(int(splitted[j]))                
+                else:                    
+                    matrixtemp.append(int(splitted[j]))
+
+        #adds the row of list into matrix
+        matrix.append(matrixtemp)
+
+    simplex_algorithm(matrix)
+    '''matrix = [[1,2,1,0,40], [4,3,0,1,120], [-40,-50,0,0,0]]
     simplex_algorithm(matrix)
 
     print()
@@ -9,7 +56,7 @@ def main():
 
     print()
     matrix = [[1,2,5,10,1,0,0,0,40],[4,3,7,1,0,1,0,0,120],[5,7,6,2,0,0,1,0,150],[6,1,8,7,0,0,0,1,130],[-40,-50,-80,-200,0,0,0,0,0]]
-    simplex_algorithm(matrix)
+    simplex_algorithm(matrix)'''
 
 def simplex_algorithm(matrix):
     #obtain the amount of rows & columns
