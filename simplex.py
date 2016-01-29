@@ -120,16 +120,15 @@ def simplex_algorithm(matrix, variables, rows):
             print()
 
     for i in range (0, variables):
-        zero = 0
-        one = 0
+        zero = 0     #1 means that the value for that variable is 0
+        one =  0     #1 means that a 1 was found for that variable
         for j in range (0, rows):
-            if (matrix[j][i] == 1):
-                if (one == 1):
-                    zero = 1
-                else:            
-                    one = 1
-                    index = j
-                    
+            if (matrix[j][i] != 0 and matrix[j][i] != 1):
+                zero = 1
+            elif (matrix[j][i] == 1):
+                one = 1
+                index = j
+
         if (zero == 1 or one == 0):
             print("X{} = 0".format(i))
             x.append(0)
